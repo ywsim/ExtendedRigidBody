@@ -1,0 +1,231 @@
+<robot name="TELLO" xmlns:xacro="http://ros.org/wiki/xacro">
+  <!-- ===== DUMMY 'BASE' LINK ==== -->
+  <link name="Torso">
+    <inertial>
+      <mass value="12.485"/>
+      <origin xyz="0.0005 0.00002 -0.00348"/>
+      <inertia ixx="0.465298168720000" ixy="0.000010319740000" ixz="0.000664292180000" iyy="0.234895709000000" iyz="-0.000130495930000" izz="0.253225886080000"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="meshes/torso.stl" scale="1 1 1"/>
+      </geometry>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </visual>
+  </link>
+
+  <!--!!!!!!!!!!!!!!!!!!!!!RIGHT LEG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+  <joint name="HML_R" type="continuous">
+    <axis xyz="0 0 1"/>
+    <origin rpy="0 0 0" xyz="0.0 -0.10 -0.1035"/>
+    <parent link="Torso"/>
+    <child link="Clamp_R"/>
+  </joint>
+  <link name="Clamp_R">
+    <inertial>
+      <mass value="0.33912"/>
+      <origin xyz="-0.00335 0.0 -0.02514"/>
+      <inertia ixx="0.000983876360000" ixy="0.000000005850000" ixz="0.000072156890000" iyy="0.001652835300000" iyz="0" izz="0.000708324000000"/>
+    </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="meshes/clamp.stl" scale="1 1 1"/>
+        </geometry>
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </visual>
+ </link>
+
+  <joint name="HAA_R" type="continuous">
+    <axis xyz="1 0 0"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.14250"/>
+    <parent link="Clamp_R"/>
+    <child link="Gimbal_R"/>
+  </joint>
+  <link name="Gimbal_R">
+    <inertial>
+      <mass value="0.325360000000000"/>
+      <origin xyz="-0.001740000000000 0.0 0.013670000000000"/>
+      <inertia ixx="0.001224110480000" ixy="0.000000000120000" ixz="-0.000003657560000" iyy="0.001044265090000" iyz="0.000000000640000" izz="0.001251193360000"/>
+    </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="meshes/gimbal.stl" scale="1 1 1"/>
+        </geometry>
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </visual>
+ </link>
+
+
+  <joint name="HFE_R" type="continuous">
+    <axis xyz="0 1 0"/>
+    <origin rpy="0.0 0 0.0" xyz="0.0 0.0 0.0"/>
+    <parent link="Gimbal_R"/>
+    <child link="Thigh_R"/>
+  </joint>
+
+  <link name="Thigh_R">
+    <inertial>
+      <mass value="0.64967"/>
+      <origin xyz="0.00689 0.00026 -0.08628"/>
+      <inertia ixx=" 0.00524247145" ixy="0.00000055732" ixz="-0.00024797745" iyy="0.00473677383" iyz="-0.00000353941" izz="0.00139482425"/>
+    </inertial>
+     <visual>
+       <geometry>
+         <mesh filename="meshes/thigh.stl" scale="1 1 1"/>
+       </geometry>
+       <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </visual>
+  </link>
+
+  <joint name="KFE_R" type="continuous">
+    <axis xyz="0 1 0"/>
+    <!-- <origin rpy="0 0 0" xyz="0.0 0.0 -0.47"/> -->
+    <origin rpy="0 0 0" xyz="0.0 0.0 -0.2286"/>
+    <parent link="Thigh_R"/>
+    <child link="Shank_R" />
+  </joint>
+
+  <link name="Shank_R">
+    <inertial>
+      <mass value="0.34667"/>
+      <origin xyz="0.005400000000000 0.000160000000000 -0.111540000000000"/>
+      <inertia ixx="0.002225342690000" ixy="0.000000444290000" ixz="-0.000005222310000" iyy="0.002222988780000" iyz="0.000000696190000" izz="0.000144341270000"/>
+    </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="meshes/shank.stl" scale="1 1 1"/>
+        </geometry>
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </visual>
+  </link>
+
+  <joint name="AFE_R" type="continuous">
+    <axis xyz="0 1 0"/>
+    <!-- <origin rpy="0 0 0" xyz="0.0 0.0 -0.47"/> -->
+    <origin rpy="0 0 0" xyz="0.0 0.0 -0.260"/>
+    <parent link="Shank_R"/>
+    <child link="Foot_R" />
+  </joint>
+
+  <link name="Foot_R">
+    <inertial>
+      <mass value="0.12032"/>
+      <origin xyz="-0.00690 0.00002 -0.01218"/>
+      <inertia ixx="0.0000427" ixy="-0.00000004114" ixz="-0.00000930745" iyy="0.00010125" iyz="0.00000005258" izz="0.00006955143"/>
+    </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="meshes/foot.stl" scale="1 1 1"/>
+        </geometry>
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </visual>
+  </link>
+
+
+  <!--!!!!!!!!!!!!!!!!!!!!!LEFT LEG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+ <joint name="HML_L" type="continuous">
+    <axis xyz="0 0 1"/>
+    <origin rpy="0 0 0" xyz="0.0 0.10 -0.1035"/>
+    <parent link="Torso"/>
+    <child link="Clamp_L"/>
+  </joint>
+  <link name="Clamp_L">
+    <inertial>
+      <mass value="0.33912"/>
+      <origin xyz="-0.00335 0.0 -0.02514"/>
+      <inertia ixx="0.000983876360000" ixy="0.000000005850000" ixz="0.000072156890000" iyy="0.001652835300000" iyz="0" izz="0.000708324000000"/>
+    </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="meshes/clamp.stl" scale="1 1 1"/>
+        </geometry>
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </visual>
+ </link>
+
+  <joint name="HAA_L" type="continuous">
+    <axis xyz="1 0 0"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.14250"/>
+    <parent link="Clamp_L"/>
+    <child link="Gimbal_L"/>
+  </joint>
+  <link name="Gimbal_L">
+    <inertial>
+      <mass value="0.325360000000000"/>
+      <origin xyz="-0.001740000000000 0.0 0.013670000000000"/>
+      <inertia ixx="0.001224110480000" ixy="0.000000000120000" ixz="-0.000003657560000" iyy="0.001044265090000" iyz="0.000000000640000" izz="0.001251193360000"/>
+    </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="meshes/gimbal.stl" scale="1 1 1"/>
+        </geometry>
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </visual>
+ </link>
+
+
+  <joint name="HFE_L" type="continuous">
+    <axis xyz="0 1 0"/>
+    <origin rpy="0.0 0 0.0" xyz="0.0 0.0 0.0"/>
+    <parent link="Gimbal_L"/>
+    <child link="Thigh_L"/>
+  </joint>
+
+  <link name="Thigh_L">
+    <inertial>
+      <mass value="0.64967"/>
+      <origin xyz="0.00689 0.00026 -0.08628"/>
+      <inertia ixx=" 0.00524247145" ixy="0.00000055732" ixz="-0.00024797745" iyy="0.00473677383" iyz="-0.00000353941" izz="0.00139482425"/>
+    </inertial>
+     <visual>
+       <geometry>
+         <mesh filename="meshes/thigh.stl" scale="1 1 1"/>
+       </geometry>
+       <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </visual>
+  </link>
+
+  <joint name="KFE_L" type="continuous">
+    <axis xyz="0 1 0"/>
+    <!-- <origin rpy="0 0 0" xyz="0.0 0.0 -0.47"/> -->
+    <origin rpy="0 0 0" xyz="0.0 0.0 -0.2286"/>
+    <parent link="Thigh_L"/>
+    <child link="Shank_L" />
+  </joint>
+
+  <link name="Shank_L">
+    <inertial>
+      <mass value="0.34667"/>
+      <origin xyz="0.005400000000000 0.000160000000000 -0.111540000000000"/>
+      <inertia ixx="0.002225342690000" ixy="0.000000444290000" ixz="-0.000005222310000" iyy="0.002222988780000" iyz="0.000000696190000" izz="0.000144341270000"/>
+    </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="meshes/shank.stl" scale="1 1 1"/>
+        </geometry>
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </visual>
+  </link>
+
+  <joint name="AFE_L" type="continuous">
+    <axis xyz="0 1 0"/>
+    <!-- <origin rpy="0 0 0" xyz="0.0 0.0 -0.47"/> -->
+    <origin rpy="0 0 0" xyz="0.0 0.0 -0.260"/>
+    <parent link="Shank_L"/>
+    <child link="Foot_L" />
+  </joint>
+
+  <link name="Foot_L">
+    <inertial>
+      <mass value="0.12032"/>
+      <origin xyz="-0.00690 0.00002 -0.01218"/>
+      <inertia ixx="0.0000427" ixy="-0.00000004114" ixz="-0.00000930745" iyy="0.00010125" iyz="0.00000005258" izz="0.00006955143"/>
+    </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="meshes/foot.stl" scale="1 1 1"/>
+        </geometry>
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </visual>
+  </link>
+</robot>
